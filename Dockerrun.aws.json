@@ -1,0 +1,46 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "durgeshpatel317/multi-client:latest",
+            // Same as service name in case of docker-compose
+            "hostname": "client",
+            // Meaning that the container is not essential for the application to keep working
+            // If essential is true and the container crash the other containers will also shut down automatically
+            // At least one container must have essential true
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "durgeshpatel317/multi-server:latest",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "durgeshpatel317/multi-worker:latest",
+            "hostname": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "durgeshpatel317/multi-nginx:latest",
+            // Hostname not mandatory as other service will not be contacting the nginx server
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            // Name of the specific containers a particular container can connect to
+            // In case of ECS forming links is required in order to make a container communicate with other container
+            "links": [
+                "client",
+                "server"
+            ]
+        }
+    ]
+}
