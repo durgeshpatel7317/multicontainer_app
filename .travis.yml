@@ -9,10 +9,10 @@ script:
   - docker run durgesh/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t durgesh/multi-client -f ./client
-  - docker build -t durgesh/multi-nginx -f ./nginx
-  - docker build -t durgesh/multi-server -f ./server
-  - docker build -t durgesh/multi-worker -f ./worker
+  - docker build -t durgesh/multi-client ./client
+  - docker build -t durgesh/multi-nginx ./nginx
+  - docker build -t durgesh/multi-server ./server
+  - docker build -t durgesh/multi-worker ./worker
 
   # Login to docker
   # Take the value of env DOCKER_PASSWORD and provide as input to the command on right side of pipe(|)
