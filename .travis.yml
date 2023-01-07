@@ -25,6 +25,8 @@ after_success:
   - docker push durgeshpatel317/multi-server
   - docker push durgeshpatel317/multi-worker
 
+# For issues with deployment using travis ci 
+# https://stackoverflow.com/questions/58774215/travis-ci-build-failed-awss3errorssignaturedoesnotmatch
 deploy:
   provider: elasticbeanstalk
   region: ap-south-1
@@ -35,5 +37,4 @@ deploy:
   on:
     branch: main
   access_key_id: $AWS_ACCESS_KEY
-  secret_access_key:
-    secure: $AWS_SECRET_KEY
+  secret_access_key: $AWS_SECRET_KEY
