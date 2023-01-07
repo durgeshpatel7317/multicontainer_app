@@ -1,3 +1,5 @@
+// Json file with comments doesn't parse successfully in aws deployment
+
 {
     "AWSEBDockerrunVersion": 2,
     "containerDefinitions": [
