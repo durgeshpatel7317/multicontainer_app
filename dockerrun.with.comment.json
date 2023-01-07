@@ -4,7 +4,11 @@
         {
             "name": "client",
             "image": "durgeshpatel317/multi-client:latest",
+            // Same as service name in case of docker-compose
             "hostname": "client",
+            // Meaning that the container is not essential for the application to keep working
+            // If essential is true and the container crash the other containers will also shut down automatically
+            // At least one container must have essential true
             "essential": false,
             "memory": 128
         },
@@ -25,6 +29,7 @@
         {
             "name": "nginx",
             "image": "durgeshpatel317/multi-nginx:latest",
+            // Hostname not mandatory as other service will not be contacting the nginx server
             "hostname": "nginx",
             "essential": true,
             "portMappings": [
@@ -33,6 +38,8 @@
                     "containerPort": 80
                 }
             ],
+            // Name of the specific containers a particular container can connect to
+            // In case of ECS forming links is required in order to make a container communicate with other container
             "links": [
                 "client",
                 "server"
