@@ -9,16 +9,18 @@ script:
   - docker run durgesh/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t durgesh/multi-client ./client
-  - docker build -t durgesh/multi-nginx ./nginx
-  - docker build -t durgesh/multi-server ./server
-  - docker build -t durgesh/multi-worker ./worker
+  # The docker image tag name should always be in a specific format only
+  # Format: <docker username>/<image-name>:<optional version name>
+  - docker build -t durgeshpatel317/multi-client ./client
+  - docker build -t durgeshpatel317/multi-nginx ./nginx
+  - docker build -t durgeshpatel317/multi-server ./server
+  - docker build -t durgeshpatel317/multi-worker ./worker
 
   # Login to docker
   # Take the value of env DOCKER_PASSWORD and provide as input to the command on right side of pipe(|)
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   ## Take the images and push the images to docker hub
-  - docker push durgesh/multi-client
-  - docker push durgesh/multi-nginx
-  - docker push durgesh/multi-server
-  - docker push durgesh/multi-worker
+  - docker push durgeshpatel317/multi-client
+  - docker push durgeshpatel317/multi-nginx
+  - docker push durgeshpatel317/multi-server
+  - docker push durgeshpatel317/multi-worker
